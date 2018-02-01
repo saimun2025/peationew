@@ -17,6 +17,7 @@
 #= require jquery-timing.min
 #= require qrcode
 #= require cookies.min
+#= require custom
 
 #= require ./lib/notifier
 #= require ./lib/pusher_connection

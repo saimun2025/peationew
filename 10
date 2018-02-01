@@ -1,0 +1,2 @@
+rake's executable "rake" conflicts with redis-rack
+Overwrite the executable? [yN]  

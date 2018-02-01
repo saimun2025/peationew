@@ -134,8 +134,8 @@ ActiveRecord::Schema.define(version: 20171206151009) do
   create_table "document_translations", force: :cascade do |t|
     t.integer  "document_id", limit: 4,     null: false
     t.string   "locale",      limit: 255,   null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "title",       limit: 255
     t.text     "body",        limit: 65535
     t.text     "desc",        limit: 65535
@@ -350,7 +350,7 @@ ActiveRecord::Schema.define(version: 20171206151009) do
   end
 
   add_index "running_accounts", ["member_id"], name: "index_running_accounts_on_member_id", using: :btree
-  add_index "running_accounts", ["source_type", "source_id"], name: "index_running_accounts_on_source_type_and_source_id", using: :btree
+  add_index "running_accounts", ["source_id", "source_type"], name: "index_running_accounts_on_source_id_and_source_type", using: :btree
 
   create_table "signup_histories", force: :cascade do |t|
     t.integer  "member_id",       limit: 4
@@ -439,6 +439,15 @@ ActiveRecord::Schema.define(version: 20171206151009) do
   add_index "trades", ["bid_member_id"], name: "index_trades_on_bid_member_id", using: :btree
   add_index "trades", ["created_at"], name: "index_trades_on_created_at", using: :btree
   add_index "trades", ["currency"], name: "index_trades_on_currency", using: :btree
+
+  create_table "two_factors", force: :cascade do |t|
+    t.integer  "member_id",      limit: 4
+    t.string   "otp_secret",     limit: 255
+    t.datetime "last_verify_at"
+    t.boolean  "activated"
+    t.string   "type",           limit: 255
+    t.datetime "refreshed_at"
+  end
 
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",  limit: 255,   null: false
